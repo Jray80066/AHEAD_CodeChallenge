@@ -1,4 +1,3 @@
-from pkgutil import get_data
 import vt
 import requests
 import re
@@ -12,7 +11,10 @@ while programRunning == True:
     if len(apikey) != 64:
       print("You did not enter a full 64 character API key!")
       continue
+
     client = vt.Client(apikey)
+    
+
     print("Enter your hash:", end = ' ')
     hash = input()
     hash.strip()
@@ -31,8 +33,12 @@ while programRunning == True:
         else:
             print("Invalid hash")
             continue
-
-    file = client.get_object("/files/" + hash)
+    try:
+        file = client.get_object("/files/" + hash)
+    except vt.error.APIError:
+        print('API Error, Your API key, or hash file did not exist.')
+        client.close()
+        break
     
 
     detection_count = file.last_analysis_stats['malicious']
