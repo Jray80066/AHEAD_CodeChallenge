@@ -1,19 +1,20 @@
 from pkgutil import get_data
 import vt
 import requests
+import re
 
 programRunning = True
 
 while programRunning == True:
     print("Enter your API key:", end = ' ')
-    apikey = "8b9b9e4e5ef59d47c5e31182ba4c70ca1a6441ad1e6b2a1872367c8eb5f3a513"
+    apikey = input()
     apikey.strip()
-  #  if len(apikey) != 64:
-   #   print("You did not enter a full 64 character API key!")
-   #   continue
+    if len(apikey) != 64:
+      print("You did not enter a full 64 character API key!")
+      continue
     client = vt.Client(apikey)
     print("Enter your hash:", end = ' ')
-    hash = "9001567e2025f83c936b8746fd3b01e44572f70d8ddec39b75b9459f7e5089c8"
+    hash = input()
     hash.strip()
     hash.lower()
     if len(hash) == 64:
