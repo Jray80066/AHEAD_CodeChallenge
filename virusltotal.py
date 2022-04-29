@@ -1,9 +1,5 @@
 from pkgutil import get_data
 import vt
-import re
-import time
-import aiohttp
-import asyncio
 import requests
 
 programRunning = True
